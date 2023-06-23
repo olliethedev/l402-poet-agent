@@ -23,10 +23,13 @@ export const originalFetchWithLsat = async (originalFetch:any, url: string, fetc
     fetchArgs.headers = {};
   }
   const cachedLsatData = store.getItem(url);
-  if (cachedLsatData) {
+  if (cachedLsatData && !isJWTValid(cachedLsatData)) {
     const data = JSON.parse(cachedLsatData);
     fetchArgs.headers["Authorization"] = `LSAT ${data.mac}:${data.preimage}`;
     return await originalFetch(url, fetchArgs)
+  } else if (isJWTValid(cachedLsatData)) {
+    console.log("LSAT expired, removing from cache");
+    store.setItem(url, null);
   }
 
   fetchArgs.headers["Accept-Authenticate"] = "LSAT";
@@ -50,6 +53,17 @@ export const originalFetchWithLsat = async (originalFetch:any, url: string, fetc
 
   fetchArgs.headers["Authorization"] = `LSAT ${mac}:${invResp.preimage}`;
   return await originalFetch(url, fetchArgs);
+}
+
+const isJWTValid = (jwt?: string) => {
+    if (!jwt) {
+        return true;
+    }
+    const parts = jwt.split(".");
+    const payload = JSON.parse(atob(parts[1]));
+    //check if expired
+    console.log("JWT payload", payload);
+    return Math.floor(Date.now() / 1000) > payload.exp;
 }
 
 export default originalFetchWithLsat;
