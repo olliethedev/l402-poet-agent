@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { createSwaggerSpec } from 'next-swagger-doc';
 import { NextResponse } from 'next/server';
 
@@ -32,6 +31,6 @@ const spec = createSwaggerSpec({
 });
 
 
-export async function GET(request: NextApiRequest, response: NextApiResponse) {
+export async function GET() {
     return NextResponse.json(spec)
 }
