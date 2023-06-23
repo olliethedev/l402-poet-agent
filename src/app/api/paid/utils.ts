@@ -27,8 +27,9 @@ export const generateToken = async function generateToken(invoice: { paymentRequ
     const jwt = await new jose.SignJWT({ 'pr': invoice.paymentRequest, 'path': path })
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
-        .setExpirationTime('2h')
+        .setExpirationTime('60s')
         .sign(SECRET)
 
     return jwt;
 }
+
