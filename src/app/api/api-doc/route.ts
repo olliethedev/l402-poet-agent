@@ -11,7 +11,7 @@ const spec = createSwaggerSpec({
         },
         servers: [
             {
-                url: "http://localhost:3000",
+                url: process.env.HOST_URL as any,
             }],
             paths: {
                 "/api/paid": {
