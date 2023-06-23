@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_model": "PoetAgent",
+    "name_for_human": "Poet Agent",
+    "description_for_human": "Write beautiful content with the help of Poet Agent",
+    "description_for_model": "Assistant uses the Poet Agent plugin to write and improve any text.",
+    "api": {
+      "type": "openapi",
+      "url": "http://localhost:3000/api/api-doc/",
+      "has_user_authentication": false
+    },
+    "auth": {
+      "type": "none"
+    },
+    "logo_url": "http://localhost:3000/next.svg",
+    "contact_email": "example@example.com",
+    "legal_info_url": "http://localhost:3000/us/legal/"
+  }
