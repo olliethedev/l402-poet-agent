@@ -4,11 +4,9 @@ import * as AlbyTools from 'alby-tools'
 import { generateToken, isValidPreimage } from './app/api/paid/utils';
 const RECIPIENT = process.env.RECIPIENT as any;
 const PRICE_IN_SATS = 100;
- 
+
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-    console.log("middleware")
-    console.log(request.url)
     const requestHeaders = new Headers(request.headers)
     const authHeader = requestHeaders.get('Authorization')
     if (authHeader) {
@@ -38,7 +36,7 @@ export async function middleware(request: NextRequest) {
         },
     })
 }
- 
+
 export const config = {
-  matcher: '/api/paid/:path*',
+    matcher: '/api/paid/:path*',
 }
